@@ -1,4 +1,4 @@
-# sketch_smooth_curves
+# Processing sketch for Smooth Curves study
 
 A study of curves and gradients.  
 Some curated outputs were [published as NFTs on Objkt.com](https://objkt.com/collection/KT1S1ZtQ26pHo2E74hCDBKXqsTdX8bz9yZXF).
