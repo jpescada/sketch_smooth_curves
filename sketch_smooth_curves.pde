@@ -1,11 +1,18 @@
 int SIZE=1000;
 int W = 750;
 int H = 1000;
-int SEED = floor(random(999999999));
-String FILE = "smooth_curves_"+ SEED;
+int SEED = getSeed();
 
-// 0, 8, 9, 18, 23, 27, 32
-// 49143, 55674, 65548, 127764, 327426, 734939, 1687411
+int getSeed() {
+  return floor(random(999999999));
+}
+
+String getFilename(int scale) {
+  if (scale > 1) {
+    return "smooth_curves_"+ SEED +"-HD-"+ scale +".png";
+  }
+  return "smooth_curves_"+ SEED +".png";
+}
 
 void setup() {
   size(750, 1000);
@@ -63,7 +70,8 @@ void render() {
 
   stroke(0, 20);
   //stroke(255, 20);
-  strokeWeight(random(1) > .5 ? 3 : 1);
+  //strokeWeight(random(1) > .5 ? 3 : 1);
+  strokeWeight(3);
 
   for (float x=-W*.01; x<W*1.01; x+=.25) {
     
@@ -79,7 +87,7 @@ void render() {
 
       w+=v;
       point(w, y);
-      v+=map(noise(w*.001, y*.002), 0, 1, -.005, .005);      
+      v+=map(noise(w*.002, y*.002), 0, 1, -.005, .005);      
       
       v=constrain(v, -2, 2);
 
@@ -109,7 +117,7 @@ void saveHighRes(int scaleFactor) {
 
   endRecord();
 
-  hires.save(FILE +"-HD-"+ scaleFactor +".png");
+  hires.save(getFilename(scaleFactor));
   println("Finished");
 }
 
@@ -117,11 +125,11 @@ void keyPressed() {
   println("Key pressed: "+ key);
 
   if (key == 's') {
-    saveFrame(FILE +".png");
+    saveFrame(getFilename(1));
   } else if (key == 'h') {
     saveHighRes(14);
   } else {
-    SEED = floor(random(999999999));
+    SEED = getSeed();
     seededRender();
   }
 }
