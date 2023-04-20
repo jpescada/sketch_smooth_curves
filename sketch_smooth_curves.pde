@@ -19,8 +19,7 @@ void setup() {
   seededRender();
 }
 
-void draw() {
-}
+void draw() {}
 
 void seededRender() {
   randomSeed(SEED);
